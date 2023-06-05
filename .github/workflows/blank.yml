@@ -16,6 +16,12 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Extract Pull Request Details
+        id: pr_details
+        run: |
+          echo "::set-output name=title::${{ github.event.pull_request.title }}"
+          echo "::set-output name=description::${{ github.event.pull_request.body }}"
+
       - name: Notify Slack
         uses: 8398a7/action-slack@v3
         env:
@@ -29,4 +35,5 @@ jobs:
             *Repository*: ${{ github.repository }}
             *Pull Request*: ${{ github.event.pull_request.html_url }}
             *Author*: ${{ github.event.pull_request.user.login }}
-            *Reviewer*: @your-username
+            *Title*: ${{ steps.pr_details.outputs.title }}
+            *Description*: ${{ steps.pr_details.outputs.description }}
