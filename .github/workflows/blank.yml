@@ -23,6 +23,7 @@ jobs:
         with:
           channel: "Korab Duklini"
           color: '#36a64f'
+          status: "SUCCESS"
           text: |
             :warning: Pull Request Review Requested :warning:
 
@@ -30,4 +31,3 @@ jobs:
             *Pull Request*: ${{ github.event.pull_request.html_url }}
             *Author*: ${{ github.event.pull_request.user.login }}
             *Reviewer*: @your-username
-          status: "SUCCESS"
