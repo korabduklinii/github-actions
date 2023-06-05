@@ -1,31 +1,32 @@
-name: Slack Notification on Issue
+name: Pull Request Review Notification
 
 on:
-  issues:
+  pull_request:
     types:
       - opened
-    assignee:
-      - 'korabduklinii'
+      - edited
+    branches:
+      - main
 
 jobs:
-  notify-on-assignee:
+  send-notification:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Set GitHub username
-        id: username
-        run: echo "::set-output name=username::${{ github.actor }}"
-
-      - name: Send Slack notification
+      - name: Notify Slack
         uses: 8398a7/action-slack@v3
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.WEBHOOK_SECRET}}
+          SLACK_WEBHOOK_URL: ${{ secrets.WEBHOOK_SECRET }}
         with:
           channel: "Korab Duklini"
-          username: GitHub Actions
-          icon_emoji: ":robot_face:"
-          text: "An issue has been opened and you have been assigned as a reviewer"
-          status: "SUCCESS"
+          color: '#36a64f'
+          text: |
+            :warning: Pull Request Review Requested :warning:
+
+            *Repository*: ${{ github.repository }}
+            *Pull Request*: ${{ github.event.pull_request.html_url }}
+            *Author*: ${{ github.event.pull_request.user.login }}
+            *Reviewer*: @your-username
