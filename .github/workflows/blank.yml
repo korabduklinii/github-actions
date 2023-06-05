@@ -22,7 +22,7 @@ jobs:
       - name: Send Slack notification
         uses: 8398a7/action-slack@v3
         env:
-          SLACK_WEBHOOK_URL: "https://hooks.slack.com/workflows/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"
+          SLACK_WEBHOOK_URL: ${{ secrets.WEBHOOK_SECRET}}
         with:
           channel: "Korab Duklini"
           username: GitHub Actions
