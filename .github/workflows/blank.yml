@@ -22,7 +22,6 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.WEBHOOK_SECRET }}
         with:
           channel: "Korab Duklini"
-          color: '#36a64f'
           status: "SUCCESS"
           text: |
             :warning: Pull Request Review Requested :warning:
