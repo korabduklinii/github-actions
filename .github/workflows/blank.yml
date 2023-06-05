@@ -1,0 +1,30 @@
+name: Slack Notification on Issue
+
+on:
+  issues:
+    types:
+      - opened
+    assignee:
+      - 'korabduklinii'
+
+jobs:
+  notify-on-assignee:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set GitHub username
+        id: username
+        run: echo "::set-output name=username::${{ github.actor }}"
+
+      - name: Send Slack notification
+        uses: 8398a7/action-slack@v3
+        env:
+          SLACK_WEBHOOK_URL: "https://hooks.slack.com/workflows/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"
+        with:
+          channel: "Korab Duklini"
+          username: GitHub Actions
+          icon_emoji: ":robot_face:"
+          text: "An issue has been opened and you have been assigned as a reviewer."
