@@ -28,3 +28,4 @@ jobs:
           username: GitHub Actions
           icon_emoji: ":robot_face:"
           text: "An issue has been opened and you have been assigned as a reviewer."
+          status: "SUCCESS"
